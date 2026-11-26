@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sreedarsh M.A | Aspiring ML Engineer</title>
+<meta name="description" content="Portfolio of Sreedarsh M.A: BCA graduate with IT support experience, now learning Python and machine learning.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;1,400&family=Hanken+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #0c0d0e;
+    --ink: #efe9dc;
+    --muted: #8b8a85;
+    --line: rgba(239, 233, 220, .14);
+    --amber: #b8681c;
+    --display: "Bodoni Moda", "Didot", "Times New Roman", serif;
+    --body: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+    --pad: 6vw;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--body); font-weight: 300;
+    background: var(--bg); color: var(--ink);
+    line-height: 1.65; -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+  ul { list-style: none; }
+
+  /* ---------- NAV (bordered strip) ---------- */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 30;
+    display: grid; grid-template-columns: 220px 1fr 220px;
+    height: 68px; background: rgba(12, 13, 14, .82); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav > * { display: flex; align-items: center; justify-content: center; }
+  .nav-logo { font-family: var(--display); font-size: 1.5rem; border-right: 1px solid var(--line); }
+  .nav-links { gap: 3rem; font-size: .8rem; }
+  .nav-links a { color: var(--muted); transition: color .2s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta { border-left: 1px solid var(--line); font-size: .8rem; }
+
+  /* ---------- HERO ---------- */
+  .hero { position: relative; min-height: 100vh; min-height: 100svh; overflow: hidden; padding-top: 68px; }
+  .stage { position: relative; width: min(100%, 1180px); margin: 0 auto; height: calc(100svh - 68px); min-height: 600px; }
+
+  /* Circular window: video plays inside; animated gradient shows until you add bg.mp4 */
+  .window {
+    position: absolute; left: 50%; top: 47%; transform: translate(-50%, -50%);
+    width: clamp(250px, 54vh, 540px); aspect-ratio: 1; border-radius: 50%;
+    overflow: hidden; z-index: 1;
+    box-shadow: 0 0 0 14px rgba(239, 233, 220, .03), 0 0 0 15px var(--line);
+    background:
+      radial-gradient(circle at 30% 72%, var(--amber) 0%, transparent 46%),
+      radial-gradient(circle at 72% 28%, #4a6668 0%, transparent 52%),
+      #151617;
+    background-size: 170% 170%;
+    animation: drift 16s ease-in-out infinite alternate, appear 1.6s ease both;
+  }
+  .window video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .window::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(circle, transparent 45%, rgba(0, 0, 0, .55) 100%);
+  }
+
+  .words { position: absolute; z-index: 3; }
+  .words small { display: block; font-family: var(--display); font-style: italic; font-size: clamp(1.1rem, 2.2vw, 1.8rem); }
+  .words strong {
+    display: block; font-family: var(--display); font-weight: 400;
+    font-size: clamp(3.4rem, 9.5vw, 8.4rem); line-height: .95; letter-spacing: -.02em;
+  }
+  .words-a { left: 4%; top: 22%; animation: rise 1s cubic-bezier(.2, .7, .2, 1) .35s both; }
+  .words-b { right: 4%; bottom: 20%; text-align: right; animation: rise 1s cubic-bezier(.2, .7, .2, 1) .6s both; }
+
+  .year {
+    position: absolute; right: 8%; top: 20%; z-index: 2;
+    font-family: var(--display); font-size: clamp(2.4rem, 6vw, 5rem);
+    color: rgba(239, 233, 220, .09);
+  }
+  .tagline {
+    position: absolute; left: 0; right: 0; bottom: 6%; z-index: 3; text-align: center;
+    font-size: .68rem; letter-spacing: .55em; text-transform: uppercase; color: var(--muted);
+    animation: rise 1s ease .9s both;
+  }
+  .scroll {
+    position: absolute; left: 3%; bottom: 12%; z-index: 3;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+  }
+  .scroll .ring {
+    width: 84px; height: 84px; border-radius: 50%; border: 1px solid var(--line);
+    display: grid; place-items: center;
+  }
+  .scroll .ring span { writing-mode: vertical-rl; transform: rotate(180deg); font-size: .62rem; letter-spacing: .25em; text-transform: uppercase; color: var(--muted); }
+  .scroll .drop { width: 1px; height: 46px; background: var(--line); }
+
+  @keyframes rise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+  @keyframes appear { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes drift { from { background-position: 0% 0%; } to { background-position: 100% 100%; } }
+
+  /* ---------- SECTIONS ---------- */
+  .section {
+    padding: 110px var(--pad); border-top: 1px solid var(--line);
+    display: grid; grid-template-columns: minmax(150px, 1fr) 3fr; gap: 3rem;
+  }
+  .section-title { font-family: var(--display); font-weight: 400; font-style: italic; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1; }
+  .section-body p { max-width: 62ch; font-size: 1.05rem; line-height: 1.8; }
+  .section-body p + p { margin-top: 1.1rem; }
+  .plain-list { margin-top: 2.2rem; max-width: 62ch; }
+  .plain-list li { display: flex; gap: 1.2rem; padding: 12px 0; border-top: 1px solid var(--line); font-size: .95rem; }
+  .plain-list li span:first-child { min-width: 110px; color: var(--muted); }
+
+  .project {
+    display: grid; grid-template-columns: 1.2fr 2fr auto; gap: 2rem; align-items: baseline;
+    padding: 30px 0; border-bottom: 1px solid var(--line);
+  }
+  .project:first-child { padding-top: 0; }
+  .project h3 { font-family: var(--display); font-weight: 400; font-size: 1.5rem; }
+  .project .status { display: block; font-size: .8rem; color: var(--muted); }
+  .project p { color: var(--muted); font-size: .98rem; }
+  .project a, .contact-list a { border-bottom: 1px solid var(--ink); padding-bottom: 2px; font-size: .92rem; white-space: nowrap; }
+
+  .resume-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .resume-grid h3 { font-size: 1rem; font-weight: 600; margin-bottom: 1.6rem; }
+  .entry { border-left: 1px solid var(--line); padding: 0 0 1.8rem 1.4rem; margin-left: 2px; position: relative; }
+  .entry:last-child { padding-bottom: 0; }
+  .entry::before { content: ""; position: absolute; left: -5px; top: 9px; width: 9px; height: 9px; border-radius: 50%; background: var(--amber); }
+  .entry h4 { font-size: 1.05rem; font-weight: 400; }
+  .entry .meta { font-size: .85rem; color: var(--muted); margin-bottom: .5rem; }
+  .entry li, .entry p { font-size: .95rem; color: var(--muted); padding: 2px 0; max-width: none; }
+  .button {
+    display: inline-block; margin-top: 3rem; padding: 14px 30px;
+    border: 1px solid var(--ink); border-radius: 999px; font-size: .95rem;
+    transition: background .2s, color .2s;
+  }
+  .button:hover { background: var(--ink); color: var(--bg); }
+
+  .contact-mail {
+    display: inline-block; font-family: var(--display); font-style: italic;
+    font-size: clamp(1.5rem, 4.4vw, 3.4rem); line-height: 1.15;
+    border-bottom: 1px solid var(--ink); word-break: break-all;
+  }
+  .contact-list { margin-top: 3rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1.6rem; }
+  .contact-list small { display: block; font-size: .8rem; color: var(--muted); margin-bottom: 4px; }
+  .contact-list a { display: inline-block; }
+
+  footer { padding: 30px var(--pad); border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 800px) {
+    .nav { grid-template-columns: auto 1fr; height: 60px; }
+    .nav-cta, .scroll, .year { display: none; }
+    .nav-logo { padding: 0 1.4rem; font-size: 1.25rem; }
+    .nav-links { gap: 1.1rem; font-size: .75rem; }
+    .hero { padding-top: 60px; }
+    .stage { height: auto; min-height: 0; padding: 40px var(--pad) 70px; display: flex; flex-direction: column; align-items: center; gap: 1.6rem; }
+    .window { position: relative; left: auto; top: auto; transform: none; order: 2; width: min(78vw, 360px); }
+    .words { position: static; }
+    .words-a { order: 1; align-self: flex-start; }
+    .words-b { order: 3; align-self: flex-end; }
+    .tagline { position: static; order: 4; letter-spacing: .3em; }
+    .section { grid-template-columns: 1fr; gap: 1.6rem; padding: 80px var(--pad); }
+    .project { grid-template-columns: 1fr; gap: .6rem; }
+    .project a { justify-self: start; margin-top: .6rem; }
+    .resume-grid { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <a href="#top" class="nav-logo">Sreedarsh</a>
+  <nav class="nav-links" aria-label="Main">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#resume">Resume</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a href="#contact" class="nav-cta">Get in touch</a>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="stage">
+      <div class="year" aria-hidden="true">&#10033;2026</div>
+
+      <div class="words words-a">
+        <small>from</small>
+        <strong>Support</strong>
+      </div>
+
+      <!--
+        VIDEO WINDOW
+        Upload a short muted clip named bg.mp4 (5-15 seconds, under ~5 MB) next to this file.
+        Until it exists, the animated gradient below shows instead. Nothing breaks.
+      -->
+      <div class="window">
+        <video autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+          <source src="bg.mp4" type="video/mp4" onerror="this.closest('video').remove()">
+        </video>
+      </div>
+
+      <div class="words words-b">
+        <small>to</small>
+        <strong>Learning</strong>
+      </div>
+
+      <div class="scroll">
+        <a class="ring" href="#about" aria-label="Scroll down"><span>Scroll down</span></a>
+        <span class="drop" aria-hidden="true"></span>
+      </div>
+
+      <p class="tagline">Sreedarsh M.A &nbsp;&middot;&nbsp; Aspiring ML engineer</p>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <h2 class="section-title">About</h2>
+    <div class="section-body">
+      <p>
+        I finished my BCA in 2025 and spent about ten months in IT support at Malabar Gold and
+        Diamonds, looking after ERP and POS systems for retail stores. Keeping real systems running
+        for people who depend on them taught me to stay calm and fix problems methodically.
+      </p>
+      <p>
+        Now I'm changing direction towards AI and machine learning. I'm starting with Python,
+        aiming for an ML internship, and preparing for the NIMCET exam to pursue an MCA.
+      </p>
+      <ul class="plain-list">
+        <li><span>Experience</span><span>ERP and POS support, IT troubleshooting</span></li>
+        <li><span>Learning</span><span>Python first, then machine learning</span></li>
+        <li><span>Looking for</span><span>An ML internship</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <h2 class="section-title">Projects</h2>
+    <div class="section-body">
+      <!-- Replace these placeholders with your real projects as you build them -->
+      <article class="project">
+        <div><h3>Python basics practice</h3><span class="status">Planned</span></div>
+        <p>Beginner programs covering variables, loops and functions. Add your repository link when it's ready.</p>
+        <a href="https://github.com/sreedarshma58">View on GitHub</a>
+      </article>
+      <article class="project">
+        <div><h3>Data analysis mini project</h3><span class="status">Planned</span></div>
+        <p>A first dataset explored with Python, using tables and charts to find simple patterns.</p>
+        <a href="https://github.com/sreedarshma58">View on GitHub</a>
+      </article>
+      <article class="project">
+        <div><h3>First machine learning model</h3><span class="status">Planned</span></div>
+        <p>A beginner prediction or classification model, trained and tested on a public dataset.</p>
+        <a href="https://github.com/sreedarshma58">View on GitHub</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- RESUME -->
+  <section class="section" id="resume">
+    <h2 class="section-title">Resume</h2>
+    <div class="section-body">
+      <div class="resume-grid">
+        <div>
+          <h3>Experience</h3>
+          <div class="entry">
+            <h4>IT Support, Malabar Gold and Diamonds</h4>
+            <div class="meta">About 10 months, until September 2026</div>
+            <ul>
+              <li>Retail support for ERP and POS systems</li>
+              <li>Solved everyday technical issues for store staff</li>
+              <li>Troubleshot hardware, software and system problems</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <h3>Education</h3>
+          <div class="entry">
+            <h4>Bachelor of Computer Applications</h4>
+            <div class="meta">St. Philomena's College, Bannimantap, 2025</div>
+            <p>CGPA 6.74</p>
+          </div>
+          <div class="entry">
+            <h4>Master of Computer Applications</h4>
+            <div class="meta">Planned, through the NIMCET exam</div>
+            <p>Currently preparing.</p>
+          </div>
+        </div>
+      </div>
+      <a class="button" href="resume.pdf" download>Download resume (PDF)</a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <h2 class="section-title">Contact</h2>
+    <div class="section-body">
+      <a class="contact-mail" href="mailto:sreedarsh03@gmail.com">sreedarsh03@gmail.com</a>
+      <div class="contact-list">
+        <div><small>Phone</small><a href="tel:+918088168951">+91 80881 68951</a></div>
+        <div><small>LinkedIn</small><a href="https://www.linkedin.com/in/sreedarsh-m-a-910321386/" target="_blank" rel="noopener">Sreedarsh M.A</a></div>
+        <div><small>GitHub</small><a href="https://github.com/sreedarshma58" target="_blank" rel="noopener">sreedarshma58</a></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>&copy; <span id="year-now"></span> Sreedarsh M.A</footer>
+
+<script>
+  document.getElementById("year-now").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

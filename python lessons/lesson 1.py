@@ -1,0 +1,6 @@
+name=input("enter your name:")
+age=int(input("enter your age: "))
+height=float(input("enter your height: "))
+years=int(input("enter your date of birth: "))
+print(name,age,height,years)
+print(f"hello {name},you are {age},your height {height},your age is {2026-years}")
