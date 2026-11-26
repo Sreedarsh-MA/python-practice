@@ -10,7 +10,7 @@ Make sure you have **Python 3.6 or higher** installed on your system.
 ### Step A: Access the Project Folder
 Open your terminal or command prompt and navigate to the project directory:
 ```powershell
-cd "C:\Users\sreed\Desktop\python_learning_hub"
+cd python_learning_hub
 ```
 
 ### Step B: Set Up a Virtual Environment (Recommended)
